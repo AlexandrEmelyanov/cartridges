@@ -53,6 +53,9 @@ h1 {
     text-align: center;
 }
 
+.alert-success {
+    text-align: center;
+}
 
 .footer {
     height: 50px;

@@ -15,6 +15,15 @@
     </div>
 
     <div class="container content">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {% if message.tags == 'success' %} alert-success {% else %} alert-warning {% endif %}" role="alert" style="text-align:center;" >
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
         <div class="internal">
             <h2 class="name">Текущие заказы</h2>
             <div class="order-table">
