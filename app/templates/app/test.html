@@ -36,10 +36,9 @@
                                   <form action="{% url 'index:cartridges' %}" method="post">
                                       {% csrf_token %}
                                       <select name="status" class="form-select form-select-sm" aria-label=".form-select-sm">
-                                          <option disabled selected="selected">{{order.get_status_display}}</option>
-                                          <option value="1 {{order.id}}">В работе</option>
-                                          <option value="2 {{order.id}}">Готов к выдаче</option>
-                                          <option value="3 {{order.id}}">Выдан</option>
+                                          <option value="0">В работе</option>
+                                          <option value="1">Готов к выдаче</option>
+                                          <option value="2">Выдан</option>
                                       </select>
                                       <input class="btn btn-outline-primary" type="submit" value="Подтвердить">
                                   </form>
@@ -70,3 +69,6 @@
             crossorigin="anonymous"></script>
 </body>
 </html>
+
+    border: 2px solid #459ac4;
+    border-radius: 0px;
