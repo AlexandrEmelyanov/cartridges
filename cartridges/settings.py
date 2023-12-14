@@ -66,6 +66,10 @@ DATABASES = {
     }
 }
 
+# Users
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -96,8 +100,6 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     BASE_DIR / 'static',

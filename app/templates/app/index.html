@@ -12,51 +12,64 @@
 <body>
     <div class="header">
         <h1>Мониторинг заправки картриджей</h1>
+        {% if user.is_authenticated %}
+            <form action="{% url 'index:logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary logout">Выйти из аккаунта</button>
+            </form>
+        {% else %}
+            <form action="{% url 'index:login' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary login">Войти</button>
+            </form>
+        {% endif %}
     </div>
 
     <div class="container content">
 
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert {% if message.tags == 'success' %} alert-success {% else %} alert-warning {% endif %}" role="alert" style="text-align:center;" >
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %} alert-success {% else %} alert-warning {% endif %}"
+             role="alert" style="text-align:center;">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
 
         <div class="internal">
             <h2 class="name">Текущие заказы</h2>
             <div class="order-table">
                 <table class="table table-auto table-hover">
-                  <thead>
+                    <thead>
                     <tr>
-                      <th scope="col">Отдел</th>
-                      <th scope="col">Статус</th>
+                        <th scope="col">Отдел</th>
+                        <th scope="col">Статус</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    </thead>
+                    <tbody>
                     {% for order in orders %}
-                        <tr>
-                          <td>{{order.department}}</td>
-                          {% if user.is_authenticated %}
-                              <td>
-                                  <form action="{% url 'index:cartridges' %}" method="post">
-                                      {% csrf_token %}
-                                      <select name="status" class="form-select form-select-sm" aria-label=".form-select-sm">
-                                          <option disabled selected="selected">{{order.get_status_display}}</option>
-                                          <option value="1 {{order.id}}">В работе</option>
-                                          <option value="2 {{order.id}}">Готов к выдаче</option>
-                                          <option value="3 {{order.id}}">Выдан</option>
-                                      </select>
-                                      <input class="btn btn-outline-primary" type="submit" value="Подтвердить">
-                                  </form>
-                              </td>
-                          {% else %}
-                            <td>{{order.get_status_display}}</td>
-                          {% endif %}
-                        </tr>
+                    <tr>
+                        <td>{{order.department}}</td>
+                        {% if user.is_authenticated %}
+                        <td>
+                            <form action="{% url 'index:cartridges' %}" method="post">
+                                {% csrf_token %}
+                                <select name="status" class="form-select form-select-sm" aria-label=".form-select-sm">
+                                    <option disabled selected="selected">{{order.get_status_display}}</option>
+                                    <option value="1 {{order.id}}">В работе</option>
+                                    <option value="2 {{order.id}}">Готов к выдаче</option>
+                                    <option value="3 {{order.id}}">Выдан</option>
+                                </select>
+                                <input class="btn btn-outline-primary" type="submit" value="Подтвердить">
+                            </form>
+                        </td>
+                        {% else %}
+                        <td>{{order.get_status_display}}</td>
+                        {% endif %}
+                    </tr>
                     {% endfor %}
-                  </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>

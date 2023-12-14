@@ -18,10 +18,33 @@ body {
 }
 
 h1 {
-    padding: 33px 0px 33px 0px;
+    padding: 33px 0px 3px 0px;
     text-align: center;
     color: white;
     margin-bottom: 0px;
+}
+
+.login {
+    float: right;
+    color: white;
+    background: #459ac4;
+    font-size: 15px;
+    border-color: #459ac4;
+}
+
+.logout {
+    float: right;
+    color: white;
+    background: #459ac4;
+    font-size: 15px;
+    border-color: #459ac4;
+}
+
+
+.form-login {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .name {
