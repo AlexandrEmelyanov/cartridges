@@ -30,16 +30,14 @@
                 <table class="table table-auto table-hover">
                   <thead>
                     <tr>
-                      <th scope="col">Имя</th>
-                      <th scope="col">Фамилия</th>
+                      <th scope="col">Отдел</th>
                       <th scope="col">Статус</th>
                     </tr>
                   </thead>
                   <tbody>
                     {% for order in orders %}
                         <tr>
-                          <td>{{order.first_name}}</td>
-                          <td>{{order.last_name}}</td>
+                          <td>{{order.department}}</td>
                           {% if user.is_authenticated %}
                               <td>
                                   <form action="{% url 'index:cartridges' %}" method="post">

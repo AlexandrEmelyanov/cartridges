@@ -11,13 +11,12 @@ class Orders(models.Model):
         (ISSUED, 'Выдан'),
     )
 
-    first_name = models.CharField(max_length=64)
-    last_name = models.CharField(max_length=64)
+    department = models.CharField(max_length=128, default=None)
     status = models.SmallIntegerField(default=AT_WORK, choices=STATUSES)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Order #{self.id}. {self.first_name} {self.last_name}'
+        return f'Order #{self.id}. {self.department}'
 
     class Meta:
         verbose_name = 'Заказ'
