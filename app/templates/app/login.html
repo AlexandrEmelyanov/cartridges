@@ -1,33 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Авторизация</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card mt-5">
-            <div class="card-body">
-              <h2 class="card-title text-center">Вход (для администратора)</h2>
-              <form action="" method="post">
-                {% csrf_token %}
-                <div class="mb-3">
-                  <label for="id_username" class="form-label">Логин:</label>
-                  <input type="text" id="id_username" name="username" class="form-control" required>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Авторизация</h2>
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger" style="text-align:center">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        <form action="{% url 'index:login' %}" method="post" novalidate>
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="{{ form.username.id_for_label }}" class="form-label">
+                                    Имя пользователя:
+                                </label>
+                                {{ form.username }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="{{ form.password.id_for_label }}" class="form-label">
+                                    Пароль:
+                                </label>
+                                {{ form.password }}
+                            </div>
+                            <div class="md-3 text-center">
+                                <button type="submit" class="btn btn-primary">Войти</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="mb-3">
-                  <label for="id_password" class="form-label">Пароль:</label>
-                  <input type="password" id="id_password" name="password" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Войти</button>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</body>
 </html>

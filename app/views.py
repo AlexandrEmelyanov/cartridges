@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib import auth
 
 from .models import Orders
+from .forms import SuperUserLoginForm
 
 
 def main(request):
@@ -28,3 +30,21 @@ def main(request):
     }
 
     return render(request=request, template_name='app/index.html', context=context)
+
+
+def login(request):
+    if request.method == 'POST':
+        form = SuperUserLoginForm(data=request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = auth.authenticate(username=username, password=password)
+            if user:
+                auth.login(request=request, user=user)
+                return HttpResponseRedirect(reverse('index:cartridges'))
+
+    else:
+        form = SuperUserLoginForm()
+
+    context = {'form': form}
+    return render(request=request, template_name='app/login.html', context=context)
