@@ -1,0 +1,45 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <div class="create-order">
+        <div class="cont-internal">
+            <div class="for-link">
+                <a href="{% url 'index:cartridges' %}" class="back-main">→ Вернуться на главную страницу</a>
+            </div>
+            <h3 class="card-title text-center">Добавление нового заказа</h3>
+
+            {% if form_create.non_field_errors %}
+                <div class="alert alert-danger" style="text-align:center">
+                    {{ form_create.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <form action="{% url 'index:create-order' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="{{ form_create.department.id_for_label }}" class="form-label">
+                        Отдел:
+                    </label>
+                    {{ form_create.department }}
+                </div>
+                <fieldset disabled>
+                    <div class="mb-3">
+                        <label for="disabledTextInput" class="form-label">Статус заказа:</label>
+                        <input type="text" id="disabledTextInput" class="form-control"
+                               placeholder="В работе (по умолчанию)">
+                    </div>
+                </fieldset>
+                <div class="md-3 text-center lst">
+                    <input class="btn btn-outline-primary btn-new" type="submit" value="Подтвердить">
+                </div>
+            </form>
+        </div>
+    </div>
+    {% else %}
+        <h1 class="auth-error-ms">Доступ к данной странице ограничен.</h1>
+    {% endif %}
+{% endblock %}

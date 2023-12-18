@@ -1,11 +1,10 @@
-from django.shortcuts import render
-from django.contrib import messages
+from django.contrib import auth, messages
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
-from django.contrib import auth
 
+from .forms import OrderCreateForm, SuperUserLoginForm
 from .models import Orders
-from .forms import SuperUserLoginForm
 
 
 def main(request):
@@ -25,7 +24,7 @@ def main(request):
 
     orders = Orders.objects.filter(status__lte=2)
     context = {
-        'title': 'Cartridges status',
+        'title': 'Статус заказов',
         'orders': orders,
     }
 
@@ -46,5 +45,27 @@ def login(request):
     else:
         form = SuperUserLoginForm()
 
-    context = {'form': form}
+    context = {
+        'form': form,
+        'title': 'Авторизация'
+    }
     return render(request=request, template_name='app/login.html', context=context)
+
+
+def create_order(request):
+    if request.method == 'POST':
+        form_create = OrderCreateForm(data=request.POST)
+        if form_create.is_valid():
+            new_order = Orders.objects.create(department=request.POST['department'])
+            new_order.save()
+            messages.success(request, 'Заказ успешно добавлен!')
+            return HttpResponseRedirect(reverse('index:cartridges'))
+
+    else:
+        form_create = OrderCreateForm()
+
+    context = {
+        'form_create': form_create,
+        'title': 'Создание заказа'
+    }
+    return render(request=request, template_name='app/create-order.html', context=context)
