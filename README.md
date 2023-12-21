@@ -8,6 +8,8 @@
 + [SQLite3](https://docs.python.org/3/library/sqlite3.html#module-sqlite3)
 
 
+### Документация к проекту: [doc](documentation%2Fproject_documentation.md).
+
 ## Локальная разработка:
 
 Все действия должны выполняться из исходного каталога проекта и только после установки всех требований.
