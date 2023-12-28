@@ -27,8 +27,10 @@ venv\Scripts\activate
 git init 
 ```
 
-3. Клонируйте репозиторий.
-
+3. Клонируйте репозиторий:
+```shell
+git clone url_project
+```
 
 4. Установите файл зависимостей:
 
