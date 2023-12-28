@@ -8,7 +8,7 @@
 + [SQLite3](https://docs.python.org/3/library/sqlite3.html#module-sqlite3)
 
 
-### Документация к проекту: [doc](documentation%2Fproject_documentation.md).
+### Документация к проекту: [documentation](documentation%2Fproject_documentation.md).
 
 ## Локальная разработка:
 
